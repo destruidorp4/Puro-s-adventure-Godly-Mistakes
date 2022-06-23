@@ -5,3 +5,18 @@ html, body {
 canvas {
   display: block;
 }
+
+.gameTitle{
+  color: white;
+  font-size: 50px;
+  font-famly:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-bottom: solid orange 10px;
+}
+
+.playButton{
+  background-color: orange;
+  color: white;
+  width: 250px;
+  height: 80px;
+
+}
