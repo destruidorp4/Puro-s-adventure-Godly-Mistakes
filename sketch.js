@@ -4,7 +4,8 @@ var player
 var enemyAttack, enemyWalk, enemyDead;
 var enemyGroup =[];
 var title, playButton;
-
+var d = false;
+var a = false;
 var espadinha
 var teste
 
@@ -39,11 +40,15 @@ function preload(){
 }
 
 function setup(){
-    createCanvas(1200, 800)
-    player = createSprite(600, 400)
-    player.shapeColor = "lightgreen"
+    createCanvas(1200, 800);
+    player = createSprite(600, 400);
+    player.addAnimation("idle", playerIdle);
+    player.addAnimation("walkRight", playerWalkRight);
+    player.addAnimation("hit", playerHit);
+    player.addAnimation("dead", playerDied);
+    player.addAnimation("attack", playerAttack)
+    player.scale = 2.3
 
-    //addSprites(10, enemyGroup, enemyWalk);
 
 
     title = createElement("h1", "Puro's Adventure");
@@ -102,12 +107,22 @@ function draw(){
             player.y += 10 
         }
         if(keyDown("a")){
+            a = true
+            d = false
             player.x -= 10
         }
         if(keyDown("d")){
+            d = true
+            a = false
             player.x += 10
+            player.changeAnimation("walkRight")
         }
+        
 
+    else if(a == false && d == false){
+        player.changeAnimation("idle")
+
+}
 
         //espadinha seguindo jogadora
         espadinha.x = player.x + 50
@@ -135,19 +150,9 @@ function draw(){
    
 }
 
-
-
-
-
-
-// function collisionSwordWithEnemy(){
-//    // if(quando tiver a animação de ataque){
-//         espadinha.overlap(enemyGroup, function(collector, collected) {
-//             player.score += 21;
-//             //o sprite é coletado no grupo de colecionáveis que desencadeou
-//             //o evento
-//             collected.remove();
-//           });
-//   //  }
-  
-// }
+function keyReleased(){
+    if(keyCode === 32){
+        d = false
+        console.log(d)
+    }
+}
